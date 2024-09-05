@@ -8,7 +8,23 @@ datasource db {
 }
 
 model cliente {
-  id   String  @id(map: "cliente_id") @unique(map: "cliente_id_unique") @db.VarChar(16)
-  cnpj String? @db.VarChar(14)
-  name String? @db.VarChar(64)
+  id              String    @id(map: "cliente_id") @unique(map: "cliente_id_unique") @db.VarChar(16)
+  cnpj            String    @db.VarChar(14)
+  name            String    @db.VarChar(64)
+  cep_cob         String?   @db.VarChar(8)
+  rua_cob         String?   @db.VarChar(255)
+  bairro_cob      String?   @db.VarChar(64)
+  cidade_cob      String?   @db.VarChar(64)
+  estado_cob      String?   @db.VarChar(64)
+  pais_cob        String?   @db.VarChar(64)
+  complemento_cob String?   @db.VarChar(255)
+  cep_ent         String?   @db.VarChar(8)
+  rua_ent         String?   @db.VarChar(255)
+  bairro_ent      String?   @db.VarChar(64)
+  cidade_ent      String?   @db.VarChar(64)
+  estado_ent      String?   @db.VarChar(64)
+  pais_ent        String?   @db.VarChar(64)
+  complemento_ent String?   @db.VarChar(255)
+  create_at       DateTime? @default(now()) @db.Timestamp(6)
+  update_at       DateTime? @default(now()) @db.Timestamp(6)
 }

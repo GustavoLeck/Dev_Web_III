@@ -1,4 +1,4 @@
-import { prisma } from "../../Prisma/prisma";
+import { prisma } from "../../prisma/prisma";
 
 export class ConsultClienteDb {
   async getAll() {
