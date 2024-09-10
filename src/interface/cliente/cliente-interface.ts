@@ -1,7 +1,7 @@
 export interface Cliente {
   id: string;
   cnpj: string;
-  name: string;
+  nome: string;
   fornecedor_id: string;
   bairro_cob: string;
   bairro_ent: string;

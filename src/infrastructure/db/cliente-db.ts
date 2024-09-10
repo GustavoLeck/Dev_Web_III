@@ -20,7 +20,7 @@ export class ConsultClienteDb {
     const response = await prisma.$queryRaw`
     INSERT INTO CLIENTE (
       CNPJ, 
-      NAME,
+      NOME,
       FORNECEDOR_ID, 
       BAIRRO_COB, 
       BAIRRO_ENT, 
@@ -38,7 +38,7 @@ export class ConsultClienteDb {
       RUA_ENT,
        ) VALUES (
         ${value.cnpj},
-        ${value.name},
+        ${value.nome},
         ${value.fornecedor_id},
         ${value.bairro_cob},
         ${value.bairro_ent},
@@ -63,7 +63,7 @@ export class ConsultClienteDb {
     const response = await prisma.$queryRaw`
     UPDATE CLIENTE SET
       CNPJ = ${data.cnpj},
-      NAME = ${data.name},
+      NOME = ${data.nome},
       FORNECEDOR_ID = ${data.fornecedor_id},
       BAIRRO_COB = ${data.bairro_cob},
       BAIRRO_ENT = ${data.bairro_ent},

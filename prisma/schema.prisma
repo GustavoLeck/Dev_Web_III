@@ -10,7 +10,7 @@ datasource db {
 model cliente {
   id              String    @id(map: "cliente_id") @unique(map: "cliente_id_unique") @db.VarChar(16)
   cnpj            String    @db.VarChar(14)
-  name            String    @db.VarChar(64)
+  nome            String    @db.VarChar(64)
   fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
   bairro_cob      String?   @db.VarChar(64)
   bairro_ent      String?   @db.VarChar(64)
