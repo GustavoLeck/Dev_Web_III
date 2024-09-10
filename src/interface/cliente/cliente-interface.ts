@@ -17,6 +17,6 @@ export interface Cliente {
   pais_ent: string;
   rua_cob: string;
   rua_ent: string;
-  create_at: Date;
-  update_at: Date;
+  create_at?: Date;
+  update_at?: Date;
 }

@@ -3,7 +3,7 @@ import { Cliente } from "../../interface/cliente/cliente-interface";
 import { response } from "../../interface/response-interface";
 import { ResponseModel } from "../../model/response-model";
 
-export class ConsultClienteDb {
+export class ClienteDb {
   async getAll(): Promise<response> {
     try {
       const response = await prisma.$queryRaw`

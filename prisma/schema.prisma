@@ -55,13 +55,11 @@ model produto {
 }
 
 model tabela_preco {
-  id            String    @id(map: "tabela_preco_id") @unique(map: "tabela_preco_id_unique") @db.VarChar(16)
-  nome          String    @db.VarChar(64)
-  fornecedor_id String    @map("fornecedor_id") @db.VarChar(16)
-  produto_id    String    @map("produto_id") @db.VarChar(16)
-  descricao     String?   @db.VarChar(255)
-  create_at     DateTime? @default(now()) @db.Timestamp(6)
-  update_at     DateTime? @default(now()) @db.Timestamp(6)
+  id        String    @id(map: "tabela_preco_id") @unique(map: "tabela_preco_id_unique") @db.VarChar(16)
+  nome      String    @db.VarChar(64)
+  descricao String?   @db.VarChar(255)
+  create_at DateTime? @default(now()) @db.Timestamp(6)
+  update_at DateTime? @default(now()) @db.Timestamp(6)
 }
 
 model produto_tabela {
