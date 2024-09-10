@@ -1,14 +1,24 @@
 import { prisma } from "../../prisma/prisma";
 import { Cliente } from "../../interface/cliente/cliente-interface";
+import { response } from "../../interface/response-interface";
+import { ResponseModel } from "../../model/response-model";
 
 export class ConsultClienteDb {
-  async getAll() {
-    const response = await prisma.$queryRaw`
-   SELECT * FROM CLIENTE
-  `;
-    return response;
+  async getAll(): Promise<response> {
+    try {
+      const response = await prisma.$queryRaw`
+      SELECT * FROM CLIENTE
+    `;
+      return new ResponseModel(
+        true,
+        200,
+        "Clientes consultados com sucesso",
+        response
+      );
+    } catch (error) {
+      return new ResponseModel(false, 400, "Erro ao consultar clientes", []);
+    }
   }
-
   async getById(id: string) {
     const response = await prisma.$queryRaw`
    SELECT * FROM CLIENTE WHERE ID = ${id}
