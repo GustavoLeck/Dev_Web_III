@@ -11,8 +11,7 @@ model cliente {
   id              String    @id(map: "cliente_id") @unique(map: "cliente_id_unique") @db.VarChar(16)
   cnpj            String    @db.VarChar(14)
   name            String    @db.VarChar(64)
-  create_at       DateTime? @default(now()) @db.Timestamp(6)
-  update_at       DateTime? @default(now()) @db.Timestamp(6)
+  fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
   bairro_cob      String?   @db.VarChar(64)
   bairro_ent      String?   @db.VarChar(64)
   cep_cob         String?   @db.VarChar(8)
@@ -27,7 +26,8 @@ model cliente {
   pais_ent        String?   @db.VarChar(64)
   rua_cob         String?   @db.VarChar(255)
   rua_ent         String?   @db.VarChar(255)
-  fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
+  create_at       DateTime? @default(now()) @db.Timestamp(6)
+  update_at       DateTime? @default(now()) @db.Timestamp(6)
 }
 
 model fornecedor {

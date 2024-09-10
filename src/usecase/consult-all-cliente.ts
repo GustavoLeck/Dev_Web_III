@@ -1,4 +1,4 @@
-import { ConsultClienteDb } from "../infrastructure/db/select-clientes-db";
+import { ConsultClienteDb } from "../infrastructure/db/cliente-db";
 
 export class ConsultAllCliente {
   async execute() {
