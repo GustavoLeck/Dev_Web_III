@@ -8,7 +8,7 @@ datasource db {
 }
 
 model cliente {
-  id              String    @id @db.VarChar(16)
+  id              String    @id @default(cuid() @db.VarChar(16)
   cnpj            String    @db.VarChar(14)
   nome            String    @db.VarChar(64)
   fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
