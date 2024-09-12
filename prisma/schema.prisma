@@ -8,7 +8,7 @@ datasource db {
 }
 
 model cliente {
-  id              String    @id(map: "cliente_id") @unique(map: "cliente_id_unique") @db.VarChar(16)
+  id              String    @id @db.VarChar(16)
   cnpj            String    @db.VarChar(14)
   nome            String    @db.VarChar(64)
   fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
@@ -69,4 +69,10 @@ model produto_tabela {
   preco           Decimal   @db.Decimal(10, 2)
   create_at       DateTime? @default(now()) @db.Timestamp(6)
   update_at       DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model log {
+  id        String    @id(map: "log_id") @unique(map: "log_id_unique") @db.VarChar(16)
+  message   String    @db.VarChar(1500)
+  create_at DateTime? @default(now()) @db.Timestamp(6)
 }

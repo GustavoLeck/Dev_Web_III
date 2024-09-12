@@ -1,7 +1,7 @@
 import { prisma } from "../../prisma/prisma";
 import { tabela_produto } from "../../interface/tabela_produto/tabela_produto";
 
-export class ProdutoDb {
+export class TabelPrecoProdutoDb {
   async getAll() {
     const response = await prisma.$queryRaw`
             SELECT * FROM produto
