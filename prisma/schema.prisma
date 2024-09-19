@@ -1,14 +1,78 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("localhost:5432")
+  url      = env("BD_URL")
+}
+
+model cliente {
+  id              String    @id @default(cuid()) @db.VarChar(16)
+  cnpj            String    @db.VarChar(14)
+  nome            String    @db.VarChar(64)
+  fornecedor_id   String?   @map("fornecedor_id") @db.VarChar(16)
+  bairro_cob      String?   @db.VarChar(64)
+  bairro_ent      String?   @db.VarChar(64)
+  cep_cob         String?   @db.VarChar(8)
+  cep_ent         String?   @db.VarChar(8)
+  cidade_cob      String?   @db.VarChar(64)
+  cidade_ent      String?   @db.VarChar(64)
+  complemento_cob String?   @db.VarChar(255)
+  complemento_ent String?   @db.VarChar(255)
+  estado_cob      String?   @db.VarChar(64)
+  estado_ent      String?   @db.VarChar(64)
+  pais_cob        String?   @db.VarChar(64)
+  pais_ent        String?   @db.VarChar(64)
+  rua_cob         String?   @db.VarChar(255)
+  rua_ent         String?   @db.VarChar(255)
+  create_at       DateTime? @default(now()) @db.Timestamp(6)
+  update_at       DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model fornecedor {
+  id          String    @id(map: "fornecedor_id") @unique(map: "fornecedor_id_unique") @db.VarChar(16)
+  cnpj        String    @db.VarChar(14)
+  nome        String    @db.VarChar(64)
+  cep         String    @db.VarChar(8)
+  rua         String    @db.VarChar(255)
+  bairro      String    @db.VarChar(64)
+  cidade      String    @db.VarChar(64)
+  estado      String    @db.VarChar(64)
+  pais        String    @db.VarChar(64)
+  complemento String?   @db.VarChar(64)
+  create_at   DateTime? @default(now()) @db.Timestamp(6)
+  update_at   DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model produto {
+  id            String    @id(map: "produto_id") @unique(map: "produto_id_unique") @db.VarChar(16)
+  fornecedor_id String    @map("fornecedor_id") @db.VarChar(16)
+  nome          String    @db.VarChar(64)
+  descricao     String    @db.VarChar(255)
+  create_at     DateTime? @default(now()) @db.Timestamp(6)
+  update_at     DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model tabela_preco {
+  id        String    @id(map: "tabela_preco_id") @unique(map: "tabela_preco_id_unique") @db.VarChar(16)
+  nome      String    @db.VarChar(64)
+  descricao String?   @db.VarChar(255)
+  create_at DateTime? @default(now()) @db.Timestamp(6)
+  update_at DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model produto_tabela {
+  id              String    @id(map: "produto_tabela_id") @unique(map: "produto_tabela_id_unique") @db.VarChar(16)
+  produto_id      String    @map("produto_id") @db.VarChar(16)
+  tabela_preco_id String    @map("tabela_preco_id") @db.VarChar(16)
+  preco           Decimal   @db.Decimal(10, 2)
+  create_at       DateTime? @default(now()) @db.Timestamp(6)
+  update_at       DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model log {
+  id        String    @id(map: "log_id") @unique(map: "log_id_unique") @db.VarChar(16)
+  message   String    @db.VarChar(1500)
+  create_at DateTime? @default(now()) @db.Timestamp(6)
 }

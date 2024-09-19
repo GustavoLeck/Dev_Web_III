@@ -1,6 +1,6 @@
 import { server } from "./server";
 import dotenv from "dotenv";
-server.listen(5050, () => {
+server.listen(5052, () => {
   dotenv.config();
   console.clear();
   dotenv.config();
