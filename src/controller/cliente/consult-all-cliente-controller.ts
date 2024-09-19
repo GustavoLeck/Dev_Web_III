@@ -4,6 +4,10 @@ import { ConsultAllCliente } from "../../usecase/cliente/consult-all-cliente";
 export class ConsultAllClienteController {
   async handle(req: Request, res: Response) {
     const consultCliente = await new ConsultAllCliente().execute();
-    return res.send(consultCliente);
+    if (!consultCliente.status) {
+      consultCliente.data = [];
+      return res.status(consultCliente.code).send(consultCliente.message);
+    }
+    return res.status(consultCliente.code).send(consultCliente);
   }
 }

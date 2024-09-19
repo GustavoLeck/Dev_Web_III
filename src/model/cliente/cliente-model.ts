@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export class ClienteModel {
   id: string;
   cnpj: string;
@@ -19,7 +21,10 @@ export class ClienteModel {
   rua_ent: string;
 
   constructor(value: any) {
-    this.id = value?.id == undefined || value?.id == null ? "" : value.id;
+    this.id =
+      value?.id == undefined || value?.id == null
+        ? uuidv4().replace("-", "").substring(0, 12)
+        : value.id;
     this.cnpj =
       value?.cnpj == undefined || value?.cnpj == null ? "" : value?.cnpj;
     this.nome =

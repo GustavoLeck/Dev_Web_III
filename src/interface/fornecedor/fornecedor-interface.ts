@@ -1,5 +1,5 @@
 export interface Fornecedor {
-  id: string;
+  id?: string;
   cnpj: string;
   nome: string;
   cep: string;

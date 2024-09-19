@@ -9,6 +9,11 @@ export class ClienteDb {
       const response = await prisma.$queryRaw`
       SELECT * FROM CLIENTE
     `;
+
+      const arrayLength = (response as unknown[]).length;
+      if (arrayLength === 0) {
+        throw new Error("Nenhum cliente encontrado");
+      }
       return new ResponseModel(
         true,
         200,
@@ -24,6 +29,10 @@ export class ClienteDb {
       const response = await prisma.$queryRaw`
     SELECT * FROM CLIENTE WHERE ID = ${id}
    `;
+      const arrayLength = (response as unknown[]).length;
+      if (arrayLength === 0) {
+        throw new Error("Nenhum cliente encontrado");
+      }
       return new ResponseModel(
         true,
         200,
@@ -39,6 +48,7 @@ export class ClienteDb {
     try {
       const response = await prisma.$queryRaw`
         INSERT INTO CLIENTE (
+          ID,
           CNPJ, 
           NOME,
           FORNECEDOR_ID, 
@@ -56,25 +66,26 @@ export class ClienteDb {
           PAIS_ENT,
           RUA_COB,
           RUA_ENT
-           ) VALUES (
-            ${value.cnpj},
-            ${value.nome},
-            ${value.fornecedor_id},
-            ${value.bairro_cob},
-            ${value.bairro_ent},
-            ${value.cep_cob},
-            ${value.cep_ent},
-            ${value.cidade_cob},
-            ${value.cidade_ent},
-            ${value.complemento_cob},
-            ${value.complemento_ent},
-            ${value.estado_cob},
-            ${value.estado_ent},
-            ${value.pais_cob},
-            ${value.pais_ent},
-            ${value.rua_cob},
-            ${value.rua_ent}
-           )
+        ) VALUES (
+          ${value.id},
+          ${value.cnpj},
+          ${value.nome},
+          ${value.fornecedor_id},
+          ${value.bairro_cob},
+          ${value.bairro_ent},
+          ${value.cep_cob},
+          ${value.cep_ent},
+          ${value.cidade_cob},
+          ${value.cidade_ent},
+          ${value.complemento_cob},
+          ${value.complemento_ent},
+          ${value.estado_cob},
+          ${value.estado_ent},
+          ${value.pais_cob},
+          ${value.pais_ent},
+          ${value.rua_cob},
+          ${value.rua_ent}
+        )
       `;
       return new ResponseModel(
         true,

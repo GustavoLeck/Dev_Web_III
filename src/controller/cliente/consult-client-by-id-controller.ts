@@ -8,6 +8,12 @@ export class ConsultClienteByIdController {
         ? ""
         : req.params.idCliente.toString();
     const consultClienteById = await new ConsultClientById().execute(idCliente);
-    return res.send(consultClienteById);
+    if (!consultClienteById.status) {
+      consultClienteById.data = [];
+      return res
+        .status(consultClienteById.code)
+        .send(consultClienteById.message);
+    }
+    return res.status(consultClienteById.code).send(consultClienteById);
   }
 }

@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { ClienteModel } from "../../model/cliente/cliente-model";
-import { UpdateCliente } from "../../usecase/cliente/update-cliente";
+import { UpdateFornecedor } from "../../usecase/fornecedor/update-fornecedor";
+import { FornecedorModel } from "../../model/fornecedor/fornecedor-model";
 export class UpdateClienteController {
   async handle(req: Request, res: Response) {
     const idCliente =
       req?.params?.idCliente == undefined
         ? ""
         : req.params.idCliente.toString();
-    const newCliente = new ClienteModel(req.body);
-    const updateCliente = await new UpdateCliente().execute(
+    const newFornecedor = new FornecedorModel(req.body);
+    const updateCliente = await new UpdateFornecedor().execute(
       idCliente,
-      newCliente
+      newFornecedor
     );
     return res.status(200).send(updateCliente);
   }
