@@ -16,7 +16,7 @@ export class TabelPrecoProdutoDb {
     return response;
   }
 
-  async create(value: tabela_produto) {
+  async create(value: any) {
     const response = await prisma.$queryRaw`
             INSERT INTO produto (
                 PRODUTO_ID,
@@ -31,20 +31,18 @@ export class TabelPrecoProdutoDb {
     return response;
   }
 
-  async update(id: string, data: tabela_produto) {
+  async updatePreco(id: string, data: tabela_produto) {
     const response = await prisma.$queryRaw`
             UPDATE produto SET
-                PRODUTO_ID = ${data.produto_id},
-                TABELA_PRECO_ID = ${data.tabela_preco_id},
                 PRECO = ${data.preco}
-            WHERE ID = ${id}
         `;
     return response;
   }
 
-  async delete(id: string) {
+  async delete(data: any) {
     const response = await prisma.$queryRaw`
-            DELETE FROM produto WHERE ID = ${id}
+            WHERE PRODUTO_ID = ${data.produto_id}
+            AND TABELA_PRECO_ID = ${data.tabela_preco_id}
         `;
     return response;
   }

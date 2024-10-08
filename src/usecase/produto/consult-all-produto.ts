@@ -9,6 +9,7 @@ export class ConsultAllProduto {
     if (!response.status) {
       await new CreateLog().execute(response);
     }
+
     return new ResponseProdutoModel(
       response.status,
       response.code,
