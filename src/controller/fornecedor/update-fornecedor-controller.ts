@@ -3,15 +3,24 @@ import { UpdateFornecedor } from "../../usecase/fornecedor/update-fornecedor";
 import { FornecedorModel } from "../../model/fornecedor/fornecedor-model";
 export class UpdateClienteController {
   async handle(req: Request, res: Response) {
-    const idCliente =
-      req?.params?.idCliente == undefined
+    const idFornecedor =
+      req?.params?.idFornecedor == undefined
         ? ""
-        : req.params.idCliente.toString();
+        : req.params.idFornecedor.toString();
+
+    if (!idFornecedor) {
+      return res.status(400).send({
+        status: false,
+        code: 400,
+        message: "idFornecedor nao informado",
+        data: [],
+      });
+    }
     const newFornecedor = new FornecedorModel(req.body);
-    const updateCliente = await new UpdateFornecedor().execute(
-      idCliente,
+    const updateFornecedor = await new UpdateFornecedor().execute(
+      idFornecedor,
       newFornecedor
     );
-    return res.status(200).send(updateCliente);
+    return res.status(200).send(updateFornecedor);
   }
 }

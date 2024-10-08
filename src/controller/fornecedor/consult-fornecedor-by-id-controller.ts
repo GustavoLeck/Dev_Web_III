@@ -3,12 +3,21 @@ import { ConsultFornecedorById } from "../../usecase/fornecedor/consult-forneced
 
 export class ConsultFornecedorByIdController {
   async handle(req: Request, res: Response) {
-    const idCliente =
-      req?.params?.idCliente == undefined
+    const idFornecedor =
+      req?.params?.idFornecedor == undefined
         ? ""
-        : req.params.idCliente.toString();
+        : req.params.idFornecedor.toString();
+
+    if (!idFornecedor) {
+      return res.status(400).send({
+        status: false,
+        code: 400,
+        message: "idFornecedor nao informado",
+        data: [],
+      });
+    }
     const consultFornecedorById = await new ConsultFornecedorById().execute(
-      idCliente
+      idFornecedor
     );
     if (!consultFornecedorById.status) {
       consultFornecedorById.data = [];

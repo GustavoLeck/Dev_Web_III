@@ -7,6 +7,14 @@ export class ConsultClienteByIdController {
       req?.params?.idCliente == undefined
         ? ""
         : req.params.idCliente.toString();
+    if (!idCliente) {
+      return res.status(400).send({
+        status: false,
+        code: 400,
+        message: "idCliente nao informado",
+        data: [],
+      });
+    }
     const consultClienteById = await new ConsultClientById().execute(idCliente);
     if (!consultClienteById.status) {
       consultClienteById.data = [];

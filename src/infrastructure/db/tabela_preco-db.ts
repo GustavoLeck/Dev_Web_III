@@ -29,7 +29,6 @@ export class TabelaPrecoDb {
       const response = await prisma.$queryRaw`
       SELECT * FROM produto WHERE ID = ${id}
   `;
-
       return new ResponseModel(
         true,
         200,
