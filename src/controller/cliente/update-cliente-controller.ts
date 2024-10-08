@@ -7,6 +7,15 @@ export class UpdateClienteController {
       req?.params?.idCliente == undefined
         ? ""
         : req.params.idCliente.toString();
+
+    if (!idCliente) {
+      return res.status(400).send({
+        status: false,
+        code: 400,
+        message: "idCliente nao informado",
+        data: [],
+      });
+    }
     const newCliente = new ClienteModel(req.body);
     const updateCliente = await new UpdateCliente().execute(
       idCliente,
