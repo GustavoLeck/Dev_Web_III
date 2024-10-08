@@ -1,6 +1,7 @@
 import { prisma } from "../../prisma/prisma";
 import { Response } from "../../interface/response-interface";
 import { ResponseModel } from "../../model/response-model";
+import { tabela_produto } from "../../interface/tabela_produto/tabela_produto";
 
 export class TabelaPrecoProdutoDb {
   async getAll(): Promise<Response> {
@@ -23,7 +24,7 @@ export class TabelaPrecoProdutoDb {
       );
     }
   }
-  async create(value: any): Promise<Response> {
+  async create(value: tabela_produto): Promise<Response> {
     try {
       const response = await prisma.$queryRaw`
       INSERT INTO produto (
@@ -52,17 +53,13 @@ export class TabelaPrecoProdutoDb {
     }
   }
 
-  async updatePreco(
-    idProduto: string,
-    idTabela: string,
-    preco: number
-  ): Promise<Response> {
+  async updatePreco(value: tabela_produto): Promise<Response> {
     try {
       const response = await prisma.$queryRaw`
       UPDATE produto SET
-          PRECO = ${preco}
-      WHERE PRODUTO_ID = ${idProduto}
-      AND TABELA_PRECO_ID = ${idTabela}
+          PRECO = ${value.preco}
+      WHERE PRODUTO_ID = ${value.produto_id}
+      AND TABELA_PRECO_ID = ${value.tabela_preco_id}
   `;
       return new ResponseModel(
         true,
@@ -71,7 +68,12 @@ export class TabelaPrecoProdutoDb {
         response
       );
     } catch (error) {
-      return error;
+      return new ResponseModel(
+        false,
+        400,
+        "Erro para atualizar item da tabela de preco",
+        error
+      );
     }
   }
 

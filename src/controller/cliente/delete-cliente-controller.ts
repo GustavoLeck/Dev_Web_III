@@ -6,7 +6,6 @@ export class DeleteClienteController {
       req?.params?.idCliente == undefined
         ? ""
         : req.params.idCliente.toString();
-
     if (!idCliente) {
       return res.status(400).send({
         status: false,

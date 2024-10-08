@@ -53,7 +53,7 @@ export class TabelaPrecoDb {
           DESCRICAO 
       ) VALUES (
           ${value.nome},
-          ${value.fornecedor_id},
+          ${value.descricao},
       )
   `;
       return new ResponseModel(
