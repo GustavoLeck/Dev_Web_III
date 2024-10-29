@@ -1,0 +1,18 @@
+version: "3.3"
+
+networks:
+  mongoNet:
+   name: mongoNet
+   driver: bridge
+
+services:
+  api:
+    build: .
+    networks:
+      - mongoNet
+    restart: on-failure
+    container_name: dev-web-back
+    image: dev-web-back
+    command: npm run start
+    ports:
+      - "5052:5052"
