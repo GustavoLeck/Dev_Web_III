@@ -76,3 +76,22 @@ model log {
   message   String    @db.VarChar(1500)
   create_at DateTime? @default(now()) @db.Timestamp(6)
 }
+
+model pedido {
+  id         String    @id(map: "pedido_id") @unique(map: "pedido_id_unique") @db.VarChar(16)
+  cliente_id String    @map("cliente_id") @db.VarChar(16)
+  desconto   Decimal   @db.Decimal(10, 2)
+  frete      Decimal   @db.Decimal(10, 2)
+  descricao  String?   @db.VarChar(255)
+  create_at  DateTime? @default(now()) @db.Timestamp(6)
+  update_at  DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model produto_pedido {
+  id         String    @id(map: "produto_pedido_id") @unique(map: "produto_pedido_id_unique") @db.VarChar(16)
+  pedido_id  String    @map("pedido_id") @db.VarChar(16)
+  produto_id String    @map("produto_id") @db.VarChar(16)
+  quantidade Int
+  create_at  DateTime? @default(now()) @db.Timestamp(6)
+  update_at  DateTime? @default(now()) @db.Timestamp(6)
+}

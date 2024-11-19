@@ -44,11 +44,11 @@ export class ClienteModel {
     this.cep_cob =
       value?.cep_cob == undefined || value?.cep_cob == null
         ? ""
-        : value?.cep_cob;
+        : this.formartCep(value?.cep_cob);
     this.cep_ent =
       value?.cep_ent == undefined || value?.cep_ent == null
         ? ""
-        : value?.cep_ent;
+        : this.formartCep(value?.cep_ent);
     this.cidade_cob =
       value?.cidade_cob == undefined || value?.cidade_cob == null
         ? ""
@@ -89,5 +89,9 @@ export class ClienteModel {
       value?.rua_ent == undefined || value?.rua_ent == null
         ? ""
         : value?.rua_ent;
+  }
+
+  formartCep(value: string): string {
+    return value.replace(/\D/g, "");
   }
 }

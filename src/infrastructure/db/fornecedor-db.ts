@@ -39,7 +39,7 @@ export class FornecedorDb {
   async create(value: Fornecedor): Promise<Response> {
     try {
       const response = await prisma.$queryRaw`
-      INSERT INTO fornecedor (
+      INSERT INTO FORNECEDOR (
           CNPJ, 
           NOME,
           CEP, 

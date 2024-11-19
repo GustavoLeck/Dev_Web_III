@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import Status from "./router/status-router";
 import Cliente from "./router/cliente-router";
 import Fornecedores from "./router/fornecedor-router";
@@ -9,6 +10,7 @@ import ProdutoTabela from "./router/produto-tabela-router";
 
 const server = express();
 server.use(bodyParser.json());
+server.use(cors());
 
 server.use("/api", Status);
 server.use("/api", Cliente);

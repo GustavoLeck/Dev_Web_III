@@ -46,47 +46,7 @@ export class ClienteDb {
 
   async create(value: Cliente): Promise<Response> {
     try {
-      const response = await prisma.$queryRaw`
-        INSERT INTO CLIENTE (
-          ID,
-          CNPJ, 
-          NOME,
-          FORNECEDOR_ID, 
-          BAIRRO_COB, 
-          BAIRRO_ENT, 
-          CEP_COB, 
-          CEP_ENT,
-          CIDADE_COB,
-          CIDADE_ENT,
-          COMPLEMENTO_COB,
-          COMPLEMENTO_ENT,
-          ESTADO_COB,
-          ESTADO_ENT,
-          PAIS_COB,
-          PAIS_ENT,
-          RUA_COB,
-          RUA_ENT
-        ) VALUES (
-          ${value.id},
-          ${value.cnpj},
-          ${value.nome},
-          ${value.fornecedor_id},
-          ${value.bairro_cob},
-          ${value.bairro_ent},
-          ${value.cep_cob},
-          ${value.cep_ent},
-          ${value.cidade_cob},
-          ${value.cidade_ent},
-          ${value.complemento_cob},
-          ${value.complemento_ent},
-          ${value.estado_cob},
-          ${value.estado_ent},
-          ${value.pais_cob},
-          ${value.pais_ent},
-          ${value.rua_cob},
-          ${value.rua_ent}
-        )
-      `;
+      const response = await prisma.cliente.create({ data: value });
       return new ResponseModel(
         true,
         200,
@@ -100,27 +60,29 @@ export class ClienteDb {
 
   async update(idCliente: string, data: Cliente): Promise<Response> {
     try {
-      const response = await prisma.$queryRaw`
-      UPDATE CLIENTE SET
-        CNPJ = ${data.cnpj},
-        NOME = ${data.nome},
-        FORNECEDOR_ID = ${data.fornecedor_id},
-        BAIRRO_COB = ${data.bairro_cob},
-        BAIRRO_ENT = ${data.bairro_ent},
-        CEP_COB = ${data.cep_cob},
-        CEP_ENT = ${data.cep_ent},
-        CIDADE_COB = ${data.cidade_cob},
-        CIDADE_ENT = ${data.cidade_ent},
-        COMPLEMENTO_COB = ${data.complemento_cob},
-        COMPLEMENTO_ENT = ${data.complemento_ent},
-        ESTADO_COB = ${data.estado_cob},
-        ESTADO_ENT = ${data.estado_ent},
-        PAIS_COB = ${data.pais_cob},
-        PAIS_ENT = ${data.pais_ent},
-        RUA_COB = ${data.rua_cob},
-        RUA_ENT = ${data.rua_ent}
-      WHERE ID = ${idCliente}
-      `;
+      const response = await prisma.cliente.update({
+        data: {
+          cnpj: data.cnpj,
+          nome: data.nome,
+          // fornecedor_id: "",
+          bairro_cob: data.bairro_cob,
+          bairro_ent: data.bairro_ent,
+          cep_cob: data.cep_cob,
+          cep_ent: data.cep_ent,
+          cidade_cob: data.cidade_cob,
+          cidade_ent: data.cidade_ent,
+          complemento_cob: data.complemento_cob,
+          complemento_ent: data.complemento_ent,
+          estado_cob: data.estado_cob,
+          estado_ent: data.estado_ent,
+          pais_cob: data.pais_cob,
+          pais_ent: data.pais_ent,
+          rua_cob: data.rua_cob,
+          rua_ent: data.rua_ent,
+        },
+        where: { id: idCliente },
+      });
+
       return new ResponseModel(
         true,
         200,
